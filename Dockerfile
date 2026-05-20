@@ -1,5 +1,16 @@
 FROM jrottenberg/ffmpeg
 
-COPY video.mp4 /video.mp4
+RUN apt-get update && apt-get install -y curl
 
-CMD ffmpeg -re -i /video.mp4 -f flv rtmp://a.rtmp.youtube.com/live2/$STREAM_KEY
+RUN curl -L -o /video.mp4 https://YOUR_DIRECT_VIDEO_LINK.mp4
+
+CMD ["ffmpeg",
+"-re",
+"-stream_loop", "-1",
+"-i", "/video.mp4",
+"-c:v", "libx264",
+"-preset", "veryfast",
+"-b:v", "3000k",
+"-c:a", "aac",
+"-f", "flv",
+"rtmp://a.rtmp.youtube.com/live2/YOUR_STREAM_KEY"]
