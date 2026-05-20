@@ -2,7 +2,7 @@ FROM jrottenberg/ffmpeg
 
 RUN apt-get update && apt-get install -y curl
 
-RUN curl -L -o /video.mp4 https://YOUR_DIRECT_VIDEO_LINK.mp4
+RUN curl -L -o /video.mp4 https://files.catbox.moe/yqrbrs.mp4
 
 CMD ["ffmpeg",
 "-re",
